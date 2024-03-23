@@ -19,9 +19,9 @@ echo "done"
 ### Create symlinks to files
 for file in $FILES; do
     echo "Moving any existing $file dotfile from ~ to $BACKUP_DIR..."
-    mv ~/.$file ~/$BACKUP_DIR/
-    echo "\tCreating symlink to $file in home directory..."
-    ln -s $dir/$file ~/.$file
-    echo "\t\tDone"
+    mv ~/.$file $BACKUP_DIR/
+    echo -e "\tCreating symlink to $file in home directory..."
+    ln -s $DIR/$file ~/.$file
+    echo -e "\t\tDone"
 done
 
