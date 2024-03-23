@@ -1,0 +1,7 @@
+[init]
+	defaultBranch = main
+[user]
+	email = 89048791+ayoshi007@users.noreply.github.com
+	name = ayoshi
+[credential]
+	helper = cache --timeout=86400
