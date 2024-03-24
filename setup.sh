@@ -1,7 +1,11 @@
 #!/bin/bash
 
-run script as superuser
-apt -y install stow
+MYUSER="moka"
+MYHOME="/home/$MYUSER"
+SUDOME="sudo -u $MYUSER"
+
+
+# run script as superuser
 deps="
 bash
 curl
@@ -32,7 +36,7 @@ tree
 zsh
 zsh-syntax-highlighting
 "
-files="
+stowlinks="
 bash
 neovim
 vim 
@@ -41,28 +45,29 @@ git
 "
 
 echo "Installing dependencies"
-apt update && apt install -y ${deps}
+apt update &&
+    apt install -y ${deps}
 
 echo "Install packages"
-apt update && DEBIAN_FRONTEND=noninteractivate apt install -y ${packages}
+apt update &&
+    apt install -y ${packages}
 
 echo "Install neovim AppImage"
-curl -LO https://github.com/neovim/neovim/releases/stable/download/nvim.appimage
-chmod u+x nvim.appimage
-mkdir -p /opt/nvim
-mv nvim.appimage /opt/nvim/nvim
+$SUDOME curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage &&
+    chmod u+x nvim.appimage && 
+    mkdir -p /opt/nvim && 
+    mv nvim.appimage /opt/nvim/nvim
 
 
 echo "Creating stow symlinks"
-for file in ${files}; do
-	echo "Creating stow symlink for ${file}..."
-	stow "$file" -t ~
+for link in ${stowlinks}; do
+	echo "Creating stow symlink for ${link}..."
+	stow "$link" -t $MYHOME
 done
 
 
 echo "Getting plugins managers"
-tmux plugin manager
 echo "Installing tmux-plugin-manager (tpm)... "
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
 echo "done"
 
