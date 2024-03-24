@@ -64,8 +64,8 @@ for link in ${stowlinks}; do
 	stow "$link" -t $MYHOME
 done
 
-echo "Installing rustup"
-curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
+# echo "Installing rustup"
+# curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
 
 echo "Getting plugins managers"
 echo "Installing tmux-plugin-manager (tpm)... "
