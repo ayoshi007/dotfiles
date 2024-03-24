@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# run script as superuser
-# apt -y install stow
+run script as superuser
+apt -y install stow
 deps="
 bash
 curl
@@ -53,18 +53,16 @@ mkdir -p /opt/nvim
 mv nvim.appimage /opt/nvim/nvim
 
 
-# back up and make stow symlinks for files
+echo "Creating stow symlinks"
 for file in ${files}; do
 	echo "Creating stow symlink for ${file}..."
-	# stow "$file" -t ~
+	stow "$file" -t ~
 done
 
 
 echo "Getting plugins managers"
-# tmux plugin manager
+tmux plugin manager
 echo "Installing tmux-plugin-manager (tpm)... "
-#git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 echo "done"
-
-
 
