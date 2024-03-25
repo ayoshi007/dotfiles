@@ -1,9 +1,10 @@
 #!/bin/bash
 
-MYUSER="moka"
+MYUSER="$SUDO_USER"
 MYHOME="/home/$MYUSER"
 SUDOME="sudo -u $MYUSER"
 
+echo "User ${MYUSER} running setup.sh as superuser"
 
 # run script as superuser
 deps="
@@ -51,12 +52,12 @@ echo "Install packages"
 apt update &&
     apt install -y ${packages}
 
-echo "Install neovim AppImage"
-$SUDOME curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage &&
-    chmod u+x nvim.appimage && 
-    mkdir -p /opt/nvim && 
-    mv nvim.appimage /opt/nvim/nvim
-
+echo "Install neovim"
+rm -rf /opt/nvim-linux64
+$SUDOME curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+tar -xzf nvim-linux64.tar.gz
+sudo mv nvim-linux64 /opt
+rm nvim-linux64.tar.gz
 
 echo "Creating stow symlinks"
 for link in ${stowlinks}; do
@@ -71,4 +72,5 @@ echo "Getting plugins managers"
 echo "Installing tmux-plugin-manager (tpm)... "
 git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
 echo "done"
+apt autoremove -y
 

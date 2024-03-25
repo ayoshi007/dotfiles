@@ -141,5 +141,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # [ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 # exec tmux
-export PATH="$PATH:/opt/nvim/"
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
