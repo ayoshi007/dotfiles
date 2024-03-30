@@ -52,6 +52,12 @@ echo "Install packages"
 apt update &&
     apt install -y ${packages}
 
+echo "Make zsh default shell"
+chsh -s $(which zsh)
+
+# echo "Install oh-my-zsh"
+# $SUDOME sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 echo "Install neovim"
 rm -rf /opt/nvim-linux64
 $SUDOME curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
@@ -72,5 +78,18 @@ echo "Getting plugins managers"
 echo "Installing tmux-plugin-manager (tpm)... "
 git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
 echo "done"
+
+echo "Cleaning up with apt autoremove"
 apt autoremove -y
+
+function yes_or_none {
+    read -p "$* [y/(n)]: " yn
+    case $yn in
+	[yY]*) return 0 ;;
+    esac
+    return 1
+}
+
+yes_or_none "Reboot?" && reboot
+echo "Reboot machine to finish set up"
 
