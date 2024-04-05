@@ -53,8 +53,9 @@ echo "Install packages"
 apt update &&
     apt install -y ${packages}
 
-echo "Install neovim"
-rm -rf /opt/nvim-linux64
+echo "Removing existing neovim installation in /opt/nvim-linux64/"
+rm -r /opt/nvim-linux64
+echo "Installing neovim into /opt/nvim-linux64/"
 $SUDOME curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
 tar -xzf nvim-linux64.tar.gz
 sudo mv nvim-linux64 /opt
@@ -65,13 +66,13 @@ for link in ${stowlinks}; do
 	echo "Creating stow symlink for ${link}..."
 	stow "$link" -t $MYHOME
 done
-
+: '
 echo "Make zsh default shell"
-chsh -s $(which zsh)
+$SUDOME chsh -s $(which zsh)
 
 echo "Install oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
+$SUDOME sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+'
 # echo "Installing rustup"
 # curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
 
