@@ -16,6 +16,7 @@ stow
 packages="
 bash
 bash-completion
+bear
 cmake
 curl
 fzf
@@ -67,6 +68,9 @@ done
 
 echo "Make zsh default shell"
 chsh -s $(which zsh)
+
+echo "Install oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # echo "Installing rustup"
 # curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
