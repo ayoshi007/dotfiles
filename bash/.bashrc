@@ -143,3 +143,7 @@ export NVM_DIR="$HOME/.nvm"
 # exec tmux
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

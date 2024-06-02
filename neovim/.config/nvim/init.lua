@@ -540,6 +540,7 @@ require('lazy').setup({
         clangd = {},
         gopls = {},
         pyright = {},
+        pylsp = {},
         rust_analyzer = {},
         cmake = {},
         ast_grep = {},
@@ -868,3 +869,4 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 0
 vim.opt.smarttab = true
+vim.opt.expandtab = true
