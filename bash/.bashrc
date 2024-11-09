@@ -142,8 +142,14 @@ export NVM_DIR="$HOME/.nvm"
 # [ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 # exec tmux
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/cmake/bin"
 
 
+# load pyenv into path
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
