@@ -2,8 +2,10 @@
 Contains dotfile configurations targeting:
 - Debian-based Linux
 
-Will aim to also target:
-- Windows 10
+Inspired and partly based on dotfiles by [xero](https://github.com/xero/dotfiles/tree/main)
 
-Inspired and based on dotfiles by [xero](https://github.com/xero/dotfiles/tree/main)
+# Setup
+1. Run `git submodule init && git submodule update`
+2. Run `sudo ./setup.sh`
+
 
