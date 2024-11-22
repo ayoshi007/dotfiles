@@ -12,7 +12,7 @@ function install_neovim {
 	cpack -G DEB
 	sudo dpkg -i --force-overwrite nvim-linux64.deb
 	cd ../..
-	rm -rf neovim
+	rm -rf neovim nvim-linux64*
 }
 
 function install_ohmyzsh {
