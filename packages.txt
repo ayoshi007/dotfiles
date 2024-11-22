@@ -17,6 +17,7 @@ pipx
 python3
 python3-pip
 ripgrep
+sdkman
 stow
 tmux
 tree
