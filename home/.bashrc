@@ -141,7 +141,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # [ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 # exec tmux
-export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:/opt/cmake/bin"
 
 
@@ -153,3 +152,5 @@ eval "$(pyenv virtualenv-init -)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.local/bin:$PATH"
