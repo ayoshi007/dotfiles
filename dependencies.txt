@@ -1,0 +1,8 @@
+bash
+curl
+git
+stow
+ninja-build
+gettext
+cmake
+unzip
