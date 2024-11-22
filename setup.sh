@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./utils.sh
+
 echo "User ${MYUSER} running setup.sh as superuser"
 echo "Home directory ${MYHOME}"
 echo "Sudo me: ${SUDOME}"
