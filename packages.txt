@@ -12,6 +12,7 @@ lua5.4
 luajit
 luarocks
 nmap
+npm
 pipx
 python3
 python3-pip
