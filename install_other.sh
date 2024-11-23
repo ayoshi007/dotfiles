@@ -1,3 +1,5 @@
+#!/bin/bash
+
 . ./utils.sh
 
 function install_neovim {
@@ -32,12 +34,24 @@ function install_rustup {
 	curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
 }
 
+
 function install_tmux_plugin_manager {
 	echo "Installing tmux-plugin-manager (tpm)"
 	git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
+}
+
+function install_sdkman {
+	if [ -d "${MYHOME}/.sdkman" ]; then
+		yes_or_none "Removing existing ~/.sdkman?" && rm -rf "${MYHOME}/.sdkman"
+	fi
+
+    $SUDOME curl -s "https://get.sdkman.io" | $SUDOME bash
+    source "$MYHOME/.sdkman/bin/sdkman-init.sh"
+    sdk version
 }
 
 yes_or_none "Install neovim?" && install_neovim
 yes_or_none "Install ohmyzsh?" && install_ohmyzsh
 yes_or_none "Install rustup?" && install_rustup
 yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
+yes_or_none "Install sdkman?" && install_sdkman
