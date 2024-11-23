@@ -19,14 +19,14 @@ function install_neovim {
 
 function install_ohmyzsh {
 	echo "Making zsh the default shell"
-	$SUDOME chsh -s $(which zsh)
+	chsh -s $(which zsh)
 
 	if [ -d "${MYHOME}/.oh-my-zsh" ]; then
 		yes_or_none "Removing existing ~/.oh-my-zsh?" && rm -rf "${MYHOME}/.oh-my-zsh"
 	fi
 
 	echo "Installing oh-my-zsh"
-	$SUDOME sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 }
 
 function install_rustup {
@@ -37,7 +37,11 @@ function install_rustup {
 
 function install_tmux_plugin_manager {
 	echo "Installing tmux-plugin-manager (tpm)"
+	if [ -d "${MYHOME}/.config/tmux/plugins/tpm" ]; then
+		yes_or_none "Removing existing ~/.config/tmux/plugins/tpm?" && rm -rf "${MYHOME}/.config/tmux/plugins/tpm"
+	fi
 	git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
+    echo "Done"
 }
 
 function install_sdkman {
@@ -45,7 +49,7 @@ function install_sdkman {
 		yes_or_none "Removing existing ~/.sdkman?" && rm -rf "${MYHOME}/.sdkman"
 	fi
 
-    $SUDOME curl -s "https://get.sdkman.io" | $SUDOME bash
+    curl -s "https://get.sdkman.io" | bash
     source "$MYHOME/.sdkman/bin/sdkman-init.sh"
     sdk version
 }
