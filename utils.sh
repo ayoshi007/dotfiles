@@ -6,6 +6,6 @@ function yes_or_none {
     return 1
 }
 
-MYUSER="$SUDO_USER"
+MYUSER="$USER"
 MYHOME="/home/$MYUSER"
 SUDOME="sudo -u $MYUSER"

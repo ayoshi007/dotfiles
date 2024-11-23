@@ -31,7 +31,7 @@ function install_ohmyzsh {
 
 function install_rustup {
 	echo "Installing rustup"
-	curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | $SUDOME sh -s -- --default-toolchain stable --profile default
+	curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default
 }
 
 
