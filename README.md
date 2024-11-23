@@ -6,6 +6,6 @@ Inspired and partly based on dotfiles by [xero](https://github.com/xero/dotfiles
 
 # Setup
 1. Run `git submodule init && git submodule update`
-2. Run `sudo ./setup.sh`
+2. Run `./setup.sh`
 
 
