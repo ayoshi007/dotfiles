@@ -27,6 +27,12 @@ function install_ohmyzsh {
 
 	echo "Installing oh-my-zsh"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
+        sudo stow --adopt home -t "${MYHOME}"
+        echo "Done"
+        yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
+    fi
 }
 
 function install_rustup {
