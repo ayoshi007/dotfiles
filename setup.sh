@@ -2,7 +2,7 @@
 
 . ./utils.sh
 
-echo "User ${MYUSER} running setup.sh as superuser"
+echo "User ${MYUSER} running setup.sh"
 echo "Home directory ${MYHOME}"
 echo "Sudo me: ${SUDOME}"
 yes_or_none "Proceed?" || exit 1
