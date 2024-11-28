@@ -54,8 +54,17 @@ function install_sdkman {
     sdk version
 }
 
+function install_nvm {
+	if [ -d "${MYHOME}/.nvm" ]; then
+		yes_or_none "Removing existing ~/.nvm?" && rm -rf "${MYHOME}/.nvm"
+	fi
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    command -v nvm
+}
+
 yes_or_none "Install neovim?" && install_neovim
 yes_or_none "Install ohmyzsh?" && install_ohmyzsh
 yes_or_none "Install rustup?" && install_rustup
 yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
 yes_or_none "Install sdkman?" && install_sdkman
+yes_or_none "Install nvm?" && install_nvm
