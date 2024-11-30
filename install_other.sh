@@ -28,11 +28,11 @@ function install_ohmyzsh {
 	echo "Installing oh-my-zsh"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-    if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
-        sudo stow --adopt home -t "${MYHOME}"
-        echo "Done"
-        yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
-    fi
+	if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
+		sudo stow --adopt home -t "${MYHOME}"
+		echo "Done"
+		yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
+	fi
 }
 
 function install_rustup {
@@ -47,7 +47,7 @@ function install_tmux_plugin_manager {
 		yes_or_none "Removing existing ~/.config/tmux/plugins/tpm?" && rm -rf "${MYHOME}/.config/tmux/plugins/tpm"
 	fi
 	git clone --depth=1 https://github.com/tmux-plugins/tpm $MYHOME/.config/tmux/plugins/tpm
-    echo "Done"
+	echo "Done"
 }
 
 function install_sdkman {
@@ -55,24 +55,31 @@ function install_sdkman {
 		yes_or_none "Removing existing ~/.sdkman?" && rm -rf "${MYHOME}/.sdkman"
 	fi
 
-    curl -s "https://get.sdkman.io" | bash
-    source "$MYHOME/.sdkman/bin/sdkman-init.sh"
-    sdk version
+	curl -s "https://get.sdkman.io" | bash
+	source "$MYHOME/.sdkman/bin/sdkman-init.sh"
+	sdk version
 }
 
 function install_nvm {
 	if [ -d "${MYHOME}/.nvm" ]; then
 		yes_or_none "Removing existing ~/.nvm?" && rm -rf "${MYHOME}/.nvm"
 	fi
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    command -v nvm
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+	command -v nvm
 }
 
 function install_pyenv {
 	if [ -d "${MYHOME}/.pyenv" ]; then
 		yes_or_none "Removing existing ~/.pyenv?" && rm -rf "${MYHOME}/.pyenv"
 	fi
-    curl https://pyenv.run | bash
+	if yes_or_none "Install Python build dependencies?" ; then
+		sudo apt install -y make build-essential libssl-dev \
+			zlib1g-dev libbz2-dev libreadline-dev \
+			libsqlite3-dev wget curl llvm \
+			libncurses5-dev libncursesw5-dev xz-utils \
+			tk-dev libffi-dev liblzma-dev python3-openssl
+	fi
+	curl https://pyenv.run | bash
 }
 
 yes_or_none "Install neovim?" && install_neovim
