@@ -68,9 +68,17 @@ function install_nvm {
     command -v nvm
 }
 
+function install_pyenv {
+	if [ -d "${MYHOME}/.pyenv" ]; then
+		yes_or_none "Removing existing ~/.pyenv?" && rm -rf "${MYHOME}/.pyenv"
+	fi
+    curl https://pyenv.run | bash
+}
+
 yes_or_none "Install neovim?" && install_neovim
 yes_or_none "Install ohmyzsh?" && install_ohmyzsh
 yes_or_none "Install rustup?" && install_rustup
 yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
 yes_or_none "Install sdkman?" && install_sdkman
 yes_or_none "Install nvm?" && install_nvm
+yes_or_none "Install pyenv?" && install_pyenv
