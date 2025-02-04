@@ -10,3 +10,7 @@
 [diff]
     tool = vimdiff
     
+[core]
+	editor = vim
+    pager = cat
+
