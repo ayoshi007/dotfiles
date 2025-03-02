@@ -12,7 +12,7 @@ function install_neovim {
 	echo "Creating deb package and installing"
 	cd build
 	cpack -G DEB
-	sudo dpkg -i --force-overwrite nvim-linux64.deb
+	sudo dpkg -i --force-overwrite nvim-linux-x86_64.deb
 	cd ../..
 	rm -rf neovim nvim-linux64*
 }
