@@ -14,7 +14,7 @@ function install_neovim {
 	cpack -G DEB
 	sudo dpkg -i --force-overwrite nvim-linux-x86_64.deb
 	cd ../..
-	rm -rf neovim nvim-linux64*
+	rm -rf neovim nvim-linux-x86_64.deb
 }
 
 function install_ohmyzsh {
@@ -82,6 +82,10 @@ function install_pyenv {
 	curl https://pyenv.run | bash
 }
 
+function install_golang {
+	curl -LO "https://go.dev/dl/$(curl https://go.dev/VERSION\?m\=text | head -n 1).linux-amd64.tar.gz"
+}
+
 yes_or_none "Install neovim?" && install_neovim
 yes_or_none "Install ohmyzsh?" && install_ohmyzsh
 yes_or_none "Install rustup?" && install_rustup
@@ -89,3 +93,4 @@ yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
 yes_or_none "Install sdkman?" && install_sdkman
 yes_or_none "Install nvm?" && install_nvm
 yes_or_none "Install pyenv?" && install_pyenv
+# yes_or_none "Install golang?" && install_golang
