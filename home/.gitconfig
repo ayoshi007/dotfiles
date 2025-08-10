@@ -12,7 +12,6 @@
     
 [core]
 	editor = vim
-    pager = cat
 
 [log]
     date = relative
@@ -27,3 +26,5 @@
     df = diff
     dftool = difftool
 
+[pull]
+	rebase = false
