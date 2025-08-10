@@ -3,7 +3,6 @@ bash-completion
 bear
 cmake
 curl
-fzf
 golang
 git
 htop

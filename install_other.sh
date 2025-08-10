@@ -86,6 +86,11 @@ function install_golang {
 	curl -LO "https://go.dev/dl/$(curl https://go.dev/VERSION\?m\=text | head -n 1).linux-amd64.tar.gz"
 }
 
+function install_fzf {
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+}
+
 yes_or_none "Install neovim?" && install_neovim
 yes_or_none "Install ohmyzsh?" && install_ohmyzsh
 yes_or_none "Install rustup?" && install_rustup
@@ -94,3 +99,5 @@ yes_or_none "Install sdkman?" && install_sdkman
 yes_or_none "Install nvm?" && install_nvm
 yes_or_none "Install pyenv?" && install_pyenv
 # yes_or_none "Install golang?" && install_golang
+yes_or_none "Install fzf?" && install_fzf
+

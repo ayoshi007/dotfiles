@@ -117,3 +117,7 @@ export NVM_DIR="$HOME/.nvm"
 # initialize pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+alias fzfpreview="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
