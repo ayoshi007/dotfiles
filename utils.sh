@@ -12,4 +12,4 @@ function yes_or_none {
 
 MYUSER="$USER"
 MYHOME="/home/$MYUSER"
-SUDOME=$([ $MYUSER == "root" ] && echo "" || echo "sudo -u $MYUSER" )
+SUDOME=$([ $UID == 0 ] && echo "" || echo "sudo -u $MYUSER" )
