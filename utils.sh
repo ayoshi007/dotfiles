@@ -1,5 +1,9 @@
 function yes_or_none {
-    read -p "$* [y/(n)]: " yn
+    if [[ -v _UTILS_SKIP_YESNO ]]
+    then
+        return 0
+    fi
+    read -p "$1 [y/(n)]: " yn
     case $yn in
 	[yY]*) return 0 ;;
     esac
