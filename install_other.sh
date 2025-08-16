@@ -4,7 +4,7 @@
 
 function install_neovim {
 	echo "Removing existing deb installation of neovim"
-	sudo apt -y remove neovim
+	sudo apt-get -y remove neovim
 	echo "Cloning neovim repository and checking out nightly"
 	git clone https://github.com/neovim/neovim && cd neovim && git checkout nightly
 	echo "Building neovim"
@@ -73,7 +73,7 @@ function install_pyenv {
 		yes_or_none "Removing existing ~/.pyenv?" && rm -rf "${MYHOME}/.pyenv"
 	fi
 	if yes_or_none "Install Python build dependencies?" ; then
-		sudo apt install -y make build-essential libssl-dev \
+		sudo apt-get install -y make build-essential libssl-dev \
 			zlib1g-dev libbz2-dev libreadline-dev \
 			libsqlite3-dev wget curl llvm \
 			libncurses5-dev libncursesw5-dev xz-utils \
