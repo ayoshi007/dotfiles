@@ -11,5 +11,5 @@ function yes_or_none {
 }
 
 MYUSER="$USER"
-MYHOME="/home/$MYUSER"
+MYHOME="$HOME"
 SUDOME=$([ $UID == 0 ] && echo "" || echo "sudo -u $MYUSER" )
