@@ -91,13 +91,14 @@ function install_fzf {
     ~/.fzf/install
 }
 
-yes_or_none "Install neovim?" && install_neovim
-yes_or_none "Install ohmyzsh?" && install_ohmyzsh
-yes_or_none "Install rustup?" && install_rustup
-yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
-yes_or_none "Install sdkman?" && install_sdkman
-yes_or_none "Install nvm?" && install_nvm
-yes_or_none "Install pyenv?" && install_pyenv
-# yes_or_none "Install golang?" && install_golang
-yes_or_none "Install fzf?" && install_fzf
-
+function install_others {
+    yes_or_none "Install neovim?" && install_neovim
+    yes_or_none "Install ohmyzsh?" && install_ohmyzsh
+    yes_or_none "Install rustup?" && install_rustup
+    yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
+    yes_or_none "Install sdkman?" && install_sdkman
+    yes_or_none "Install nvm?" && install_nvm
+    yes_or_none "Install pyenv?" && install_pyenv
+    # yes_or_none "Install golang?" && install_golang
+    yes_or_none "Install fzf?" && install_fzf
+}

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . ./utils.sh
+. ./install_other.sh
 
 function usage() {
     cat <<EOF
@@ -29,29 +30,24 @@ echo "Sudo me: ${SUDOME}"
 yes_or_none "Proceed?" ${_UTILS_SKIP_YESNO} || exit 1
 
 echo "Updating apt"
-sudo apt update
+$SUDOME apt update
 
 echo "Installing dependencies"
-sudo apt install -y $(cat dependencies.txt)
+$SUDOME apt install -y $(cat dependencies.txt)
 
 echo "Installing packages"
-sudo apt install -y $(cat packages.txt)
+$SUDOME apt install -y $(cat packages.txt)
 
 if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
-    sudo stow --adopt home -t "${MYHOME}"
+    $SUDOME stow --adopt home -t "${MYHOME}"
     echo "Done"
     yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
 fi
 
-if [[ -v _UTILS_SKIP_YESNO ]]
-then
-    _UTILS_SKIP_YESNO=1 ./install_other.sh
-else
-    yes_or_none "Install other applications?" && ./install_other.sh
-fi
+yes_or_none "Install other applications?" && install_others
 
 echo "Cleaning up with apt autoremove"
-sudo apt autoremove -y
+$SUDOME apt autoremove -y
 
 yes_or_none "Reboot?" && reboot
 echo "Reboot machine to finish"
