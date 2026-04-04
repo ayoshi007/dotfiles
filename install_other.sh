@@ -16,6 +16,8 @@ function install_neovim {
 	sudo dpkg -i --force-overwrite nvim-linux-x86_64.deb
 	cd ../..
 	rm -rf neovim nvim-linux-x86_64.deb
+    echo "Removing neovim from vim alternatives with update-alternatives"
+    sudo update-alternatives --remove vim /usr/bin/nvim
 }
 
 function install_treesitter_cli {
