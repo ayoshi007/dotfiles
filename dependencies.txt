@@ -2,7 +2,6 @@ bash
 curl
 git
 gcc
-gcc-multilib
 stow
 ninja-build
 gettext
