@@ -15,12 +15,15 @@ function install_neovim {
 	sudo dpkg -i --force-overwrite nvim-linux-x86_64.deb
 	cd ../..
 	rm -rf neovim nvim-linux-x86_64.deb
+}
+
+function install_treesitter_cli {
     echo "Installing tree-sitter-cli"
     if [ -f "${MYHOME}/.local/bin/tree-sitter" ]; then
 		yes_or_none "Remove existing tree-sitter CLI?" && rm "${MYHOME}/.local/bin/tree-sitter"
     fi
     tree_sitter_cli_file="tree-sitter-cli-linux-x86.zip"
-    wget $(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r '.assets.[].browser_download_url' | grep '${tree_sitter_cli_file}')
+    wget $(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r '.assets.[].browser_download_url' | grep "${tree_sitter_cli_file}")
     unzip "${tree_sitter_cli_file}"
     chmod 755 tree-sitter
     mv tree-sitter "${MYHOME}/.local/bin"
@@ -104,6 +107,7 @@ function install_fzf {
 
 function install_others {
     yes_or_none "Install neovim?" && install_neovim
+    yes_or_none "Install treesitter CLI?" && install_treesitter_cli
     yes_or_none "Install ohmyzsh?" && install_ohmyzsh
     yes_or_none "Install rustup?" && install_rustup
     yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
