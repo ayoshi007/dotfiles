@@ -20,20 +20,6 @@ function install_neovim {
     sudo update-alternatives --remove vim /usr/bin/nvim
 }
 
-function install_treesitter_cli {
-    echo "Installing tree-sitter-cli"
-    if [ -f "${MYHOME}/.local/bin/tree-sitter" ]; then
-		yes_or_none "Remove existing tree-sitter CLI?" && rm "${MYHOME}/.local/bin/tree-sitter"
-    fi
-    tree_sitter_cli_file="tree-sitter-cli-linux-x86.zip"
-    wget $(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r '.assets.[].browser_download_url' | grep "${tree_sitter_cli_file}")
-    unzip "${tree_sitter_cli_file}"
-    chmod 755 tree-sitter
-    mv tree-sitter "${MYHOME}/.local/bin"
-    # move to $HOME/.local/bin
-    rm "${tree_sitter_cli_file}"
-}
-
 function install_ohmyzsh {
 	echo "Making zsh the default shell"
 	chsh -s $(which zsh)
@@ -57,6 +43,10 @@ function install_rustup {
 	curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile default
 }
 
+function install_treesitter_cli {
+    echo "Installing tree-sitter-cli with cargo"
+    cargo install tree-sitter-cli
+}
 
 function install_tmux_plugin_manager {
 	echo "Installing tmux-plugin-manager (tpm)"
@@ -110,9 +100,9 @@ function install_fzf {
 
 function install_others {
     yes_or_none "Install neovim?" && install_neovim
-    yes_or_none "Install treesitter CLI?" && install_treesitter_cli
     yes_or_none "Install ohmyzsh?" && install_ohmyzsh
     yes_or_none "Install rustup?" && install_rustup
+    yes_or_none "Install treesitter CLI (requires cargo)?" && install_treesitter_cli
     yes_or_none "Install tmux plugin manager?" && install_tmux_plugin_manager
     yes_or_none "Install sdkman?" && install_sdkman
     yes_or_none "Install nvm?" && install_nvm
