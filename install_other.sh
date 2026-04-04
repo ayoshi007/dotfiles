@@ -15,6 +15,17 @@ function install_neovim {
 	sudo dpkg -i --force-overwrite nvim-linux-x86_64.deb
 	cd ../..
 	rm -rf neovim nvim-linux-x86_64.deb
+    echo "Installing tree-sitter-cli"
+    if [ -f "${MYHOME}/.local/bin/tree-sitter" ]; then
+		yes_or_none "Remove existing tree-sitter CLI?" && rm "${MYHOME}/.local/bin/tree-sitter"
+    fi
+    tree_sitter_cli_file="tree-sitter-cli-linux-x86.zip"
+    wget $(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r '.assets.[].browser_download_url' | grep '${tree_sitter_cli_file}')
+    unzip "${tree_sitter_cli_file}"
+    chmod 755 tree-sitter
+    mv tree-sitter "${MYHOME}/.local/bin"
+    # move to $HOME/.local/bin
+    rm "${tree_sitter_cli_file}"
 }
 
 function install_ohmyzsh {
