@@ -3,10 +3,11 @@
 . ./utils.sh
 
 function install_neovim {
+    _tag="stable"
 	echo "Removing existing deb installation of neovim"
 	sudo apt-get -y remove neovim
-	echo "Cloning neovim repository and checking out nightly"
-	git clone https://github.com/neovim/neovim && cd neovim && git checkout nightly
+	echo "Cloning neovim repository and checking out ${_tag}"
+	git clone https://github.com/neovim/neovim && cd neovim && git checkout ${_tag}
 	echo "Building neovim"
 	make CMAKE_BUILD_TYPE=Release
 	echo "Creating deb package and installing"
