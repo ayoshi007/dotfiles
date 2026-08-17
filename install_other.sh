@@ -98,6 +98,10 @@ function install_fzf {
     ~/.fzf/install
 }
 
+function install_joplin {
+    NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin
+}
+
 function install_others {
     yes_or_none "Install neovim?" && install_neovim
     yes_or_none "Install ohmyzsh?" && install_ohmyzsh
@@ -109,4 +113,5 @@ function install_others {
     yes_or_none "Install pyenv?" && install_pyenv
     # yes_or_none "Install golang?" && install_golang
     yes_or_none "Install fzf?" && install_fzf
+    yes_or_none "Install joplin?" && install_joplin
 }
