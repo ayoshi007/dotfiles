@@ -11,6 +11,7 @@ Inspired and partly based on dotfiles by [xero](https://github.com/xero/dotfiles
 
 
 # WIP: Fedora support, refactoring
-- [ ] need to update list in ./scripts/fedora to reflect RPM names
-- [ ] need to mull over what directory structure to use
+- [x] need to update list in ./scripts/fedora to reflect RPM names
+- [x] need to mull over what directory structure to use
+- [ ] need to see detecting OS and using correct package manager is worth
 
