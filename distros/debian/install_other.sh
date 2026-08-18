@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. ./utils.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+REPO_HOME="${SCRIPT_DIR}/../../"
+
+. "${REPO_HOME}"/utils.sh
 
 function install_neovim {
     _tag="stable"
@@ -34,7 +37,7 @@ function install_ohmyzsh {
 	if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
 		sudo stow --adopt home -t "${MYHOME}"
 		echo "Done"
-		yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
+		yes_or_none "Restore source controlled configs?" && git restore "${REPO_HOME}/home" && echo "Done"
 	fi
 }
 

@@ -8,3 +8,4 @@ ninja-build
 gettext
 cmake
 unzip
+rpmbuild

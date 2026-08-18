@@ -1,7 +1,10 @@
 #!/bin/bash
 
-. ./utils.sh
-. ./install_other.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+REPO_HOME="${SCRIPT_DIR}/../../"
+
+. "${REPO_HOME}"/utils.sh
+. "${SCRIPT_DIR}"/install_other.sh
 
 function usage() {
     cat <<EOF
@@ -33,15 +36,15 @@ echo "Updating apt"
 sudo apt-get update
 
 echo "Installing dependencies"
-sudo apt-get install -y $(cat dependencies.txt)
+sudo apt-get install -y $(cat "${SCRIPT_DIR}/dependencies.txt")
 
 echo "Installing packages"
-sudo apt-get install -y $(cat packages.txt)
+sudo apt-get install -y $(cat "${SCRIPT_DIR}/packages.txt")
 
 if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
     $SUDOME stow --adopt home -t "${MYHOME}"
     echo "Done"
-    yes_or_none "Restore source controlled configs?" && git restore ./home && echo "Done"
+    yes_or_none "Restore source controlled configs?" && git restore "${REPO_HOME}/home" && echo "Done"
 fi
 
 yes_or_none "Install other applications?" && install_others

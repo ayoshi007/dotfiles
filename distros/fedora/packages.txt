@@ -7,7 +7,7 @@ golang
 git
 htop
 jq
-lua5.4
+lua
 luajit
 luarocks
 nmap
