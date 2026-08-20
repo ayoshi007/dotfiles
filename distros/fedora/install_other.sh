@@ -93,7 +93,13 @@ function install_pyenv {
 }
 
 function install_golang {
-	curl -LO "https://go.dev/dl/$(curl https://go.dev/VERSION\?m\=text | head -n 1).linux-amd64.tar.gz"
+    _go_version=$(curl "https://go.dev/VERSION?m=text" | head -n 1)
+    _go_tar="${_go_version}.linux-amd64.tar.gz"
+	curl -LO "https://go.dev/dl/${_go_tar}"
+	echo "Removing previous golang installation and installing ${_go_tar}"
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local/ -xzf "${_go_tar}"
+	echo "Removing ${_go_tar}"
+	rm "${_go_tar}"
 }
 
 function install_fzf {
@@ -114,7 +120,7 @@ function install_others {
     yes_or_none "Install sdkman?" && install_sdkman
     yes_or_none "Install nvm?" && install_nvm
     yes_or_none "Install pyenv?" && install_pyenv
-    # yes_or_none "Install golang?" && install_golang
+    yes_or_none "Install golang?" && install_golang
     yes_or_none "Install fzf?" && install_fzf
     yes_or_none "Install joplin?" && install_joplin
 }

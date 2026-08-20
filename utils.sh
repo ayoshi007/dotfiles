@@ -43,11 +43,11 @@ SUDOME="$( [ $UID == 0 ] && echo "" || echo "sudo -u $MYUSER" )"
 
 DISTRO_LIKE=$(distro_name)
 # package management related commands and variables
-UPDATE="$( [ $DISTRO_LIKE == "debian" ] && "apt-get update" || [ $DISTRO_LIKE == "fedora" ] && "dnf upgrade" )"
-INSTALL="$( [ $DISTRO_LIKE == "debian" ] && "apt-get install -y" || [ $DISTRO_LIKE == "fedora" ] && "dnf install -y" )"
-REMOVE="$( [ $DISTRO_LIKE == "debian" ] && "apt-get remove -y" || [ $DISTRO_LIKE == "fedora" ] && "dnf remove -y" )"
-AUTOREMOVE="$( [ $DISTRO_LIKE == "debian" ] && "apt-get autoremove -y" || [ $DISTRO_LIKE == "fedora" ] && "dnf autoremove -y" )"
-PACKAGE_EXT="$( [ $DISTRO_LIKE == "debian" ] && "deb" || [ $DISTRO_LIKE == "fedora" ] && "rpm" )"
+UPDATE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get update" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf upgrade" )"
+INSTALL="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get install -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf install -y" )"
+REMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get remove -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf remove -y" )"
+AUTOREMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get autoremove -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf autoremove -y" )"
+PACKAGE_EXT="$( [[ $DISTRO_LIKE == "debian" ]] && "deb" || [[ $DISTRO_LIKE == "fedora" ]] && "rpm" )"
 
 # distro specific files
 DEPENDENCY_FILE="$REPO_HOME/distros/$DISTRO_LIKE/dependencies.txt"

@@ -156,3 +156,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export PATH="/usr/local/go/bin:$HOME/go/bin:$HOME/.pyenv/bin:$HOME/.local/bin:$PATH"
