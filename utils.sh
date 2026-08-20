@@ -50,8 +50,8 @@ AUTOREMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get autoremove -y" || [[ $
 PACKAGE_EXT="$( [[ $DISTRO_LIKE == "debian" ]] && "deb" || [[ $DISTRO_LIKE == "fedora" ]] && "rpm" )"
 
 # distro specific files
-DEPENDENCY_FILE="$REPO_HOME/distros/$DISTRO_LIKE/dependencies.txt"
+DISTRO_FOLDER="$REPO_HOME/distros/$DISTRO_LIKE"
+DEPENDENCIES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/dependencies.txt"
 PACKAGES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/packages.txt"
-
-
+INSTALL_OTHERS_SCRIPT="$REPO_HOME/distros/$DISTRO_LIKE/install_other.sh"
 
