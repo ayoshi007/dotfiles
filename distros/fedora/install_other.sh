@@ -21,6 +21,8 @@ function install_neovim {
 	rm -rf neovim nvim-linux-x86_64.rpm
     echo "Removing neovim from vim alternatives with update-alternatives"
     sudo update-alternatives --remove vim /usr/bin/nvim
+	echo "Excluding neovim from dnf updates"
+	sudo echo "exclude=neovim" >> /etc/dnf/dnf.conf
 }
 
 function install_ohmyzsh {
