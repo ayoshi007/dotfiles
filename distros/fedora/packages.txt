@@ -19,5 +19,6 @@ ripgrep
 stow
 tmux
 tree
+vim
 zsh
 zsh-syntax-highlighting
