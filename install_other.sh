@@ -3,11 +3,10 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 REPO_HOME="${SCRIPT_DIR}/../../"
 
-. "${REPO_HOME}"/utils.sh
+. "${SCRIPT_DIR}"/utils.sh
 
 # bring install functions into scope
 . "${INSTALL_OTHER_SCRIPT}"
-"${REPO_HOME}"/utils.sh
 
 function install_neovim {
     echo "Running distro specific script to install neovim"

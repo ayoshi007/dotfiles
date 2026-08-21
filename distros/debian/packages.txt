@@ -3,7 +3,6 @@ bash-completion
 bear
 cmake
 curl
-golang
 git
 htop
 jq

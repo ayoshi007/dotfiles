@@ -3,13 +3,13 @@ bash-completion
 bear
 cmake
 curl
-golang
 git
 htop
 jq
 lua
 luajit
 luarocks
+neovim
 nmap
 npm
 pipx

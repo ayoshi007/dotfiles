@@ -1,9 +1,8 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-REPO_HOME="${SCRIPT_DIR}/../../"
 
-. "${REPO_HOME}"/utils.sh
+. "${SCRIPT_DIR}"/utils.sh
 . "${SCRIPT_DIR}"/install_other.sh
 
 function usage() {
@@ -42,10 +41,10 @@ echo "Updating"
 sudo ${UPDATE}
 
 echo "Installing dependencies"
-sudo ${INSTALL} ${DEPENDENCIES_FILE}
+sudo ${INSTALL} $(cat ${DEPENDENCIES_FILE})
 
 echo "Installing packages"
-sudo ${INSTALL} ${PACKAGES_FILE}
+sudo ${INSTALL} $(cat ${PACKAGES_FILE})
 
 if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
     $SUDOME stow --adopt home -t "${MYHOME}"

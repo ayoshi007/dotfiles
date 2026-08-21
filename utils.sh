@@ -15,22 +15,26 @@ function yes_or_none {
 }
 
 function distro_name {
-    distro_id=$(cat /etc/os-release | grep "^ID=") 
-    if [[ "${distro_id,,}" == "**debian**" ]]
+    distro_id=$(cat /etc/os-release | grep "^ID=" | tr '[:upper:]' '[:lower:]') 
+    if [[ "${distro_id}" == *"debian"* ]]
     then
-        return "debian"
-    elif [[ "${distro_id,,}" == "**fedora**" ]]
+        echo "debian"
+        return 0
+    elif [[ "${distro_id}" == *"fedora"* ]]
     then
-        return "fedora"
+        echo "fedora"
+        return 0
     fi
 
-    distro_id_like=$(cat /etc/os-release | grep "^ID_LIKE=") 
-    if [[ "${distro_id_like,,}" == "**debian**" ]]
+    distro_id_like=$(cat /etc/os-release | grep "^ID_LIKE=" | tr '[:upper:]' '[:lower:]') 
+    if [[ "${distro_id_like}" == *"debian"* ]]
     then
-        return "debian"
-    elif [[ "${distro_id_like,,}" == "**fedora**" ]]
+        echo "debian"
+        return 0
+    elif [[ "${distro_id_like}" == *"fedora"* ]]
     then
-        return "fedora"
+        echo "fedora"
+        return 0
     else
         echo "Only supported distros are Debian, Fedora based distros"
         exit 1
@@ -39,19 +43,19 @@ function distro_name {
 
 MYUSER="$USER"
 MYHOME="$HOME"
-SUDOME="$( [ $UID == 0 ] && echo "" || echo "sudo -u $MYUSER" )"
+SUDOME="$( [ "$UID" == 0 ] && echo "" || echo "sudo -u $MYUSER" )"
 
 DISTRO_LIKE=$(distro_name)
 # package management related commands and variables
-UPDATE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get update" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf upgrade" )"
-INSTALL="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get install -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf install -y" )"
-REMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get remove -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf remove -y" )"
-AUTOREMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && "apt-get autoremove -y" || [[ $DISTRO_LIKE == "fedora" ]] && "dnf autoremove -y" )"
-PACKAGE_EXT="$( [[ $DISTRO_LIKE == "debian" ]] && "deb" || [[ $DISTRO_LIKE == "fedora" ]] && "rpm" )"
+UPDATE="$( [[ $DISTRO_LIKE == "debian" ]] && echo "apt-get update -y" || [[ $DISTRO_LIKE == "fedora" ]] && echo "dnf upgrade -y" )"
+INSTALL="$( [[ $DISTRO_LIKE == "debian" ]] && echo "apt-get install -y" || [[ $DISTRO_LIKE == "fedora" ]] && echo "dnf install -y" )"
+REMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && echo "apt-get remove -y" || [[ $DISTRO_LIKE == "fedora" ]] && echo "dnf remove -y" )"
+AUTOREMOVE="$( [[ $DISTRO_LIKE == "debian" ]] && echo "apt-get autoremove -y" || [[ $DISTRO_LIKE == "fedora" ]] && echo "dnf autoremove -y" )"
+PACKAGE_EXT="$( [[ $DISTRO_LIKE == "debian" ]] && echo "deb" || [[ $DISTRO_LIKE == "fedora" ]] && echo "rpm" )"
 
 # distro specific files
 DISTRO_FOLDER="$REPO_HOME/distros/$DISTRO_LIKE"
 DEPENDENCIES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/dependencies.txt"
 PACKAGES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/packages.txt"
-INSTALL_OTHERS_SCRIPT="$REPO_HOME/distros/$DISTRO_LIKE/install_other.sh"
+INSTALL_OTHER_SCRIPT="$REPO_HOME/distros/$DISTRO_LIKE/install_other.sh"
 
