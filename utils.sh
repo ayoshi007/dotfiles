@@ -59,6 +59,7 @@ EOF
         ;;
         fedora)
             cat <<EOF
+dnf update -y
 dnf install -y
 dnf remove -y
 dnf autoremove -y
