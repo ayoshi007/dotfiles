@@ -41,21 +41,55 @@ function distro_name {
     fi
 }
 
+function populate_variables {
+    distro_like=$1
+    case "$distro_like" in
+        debian)
+            cat <<EOF
+apt-get update -y
+apt-get install -y
+apt-get remove -y
+apt-get autoremove -y
+deb
+$REPO_HOME/distros/$distro_like
+$REPO_HOME/distros/$distro_like/dependencies.txt
+$REPO_HOME/distros/$distro_like/packages.txt
+$REPO_HOME/distros/$distro_like/install_other.sh
+EOF
+        ;;
+        fedora)
+            cat <<EOF
+dnf install -y
+dnf remove -y
+dnf autoremove -y
+rpm
+$REPO_HOME/distros/$distro_like
+$REPO_HOME/distros/$distro_like/dependencies.txt
+$REPO_HOME/distros/$distro_like/packages.txt
+$REPO_HOME/distros/$distro_like/install_other.sh
+EOF
+        ;;
+        *)
+            echo "Only supported distros are Debian, Fedora based distros"
+            exit 1
+            ;;
+    esac
+}
+
 MYUSER="$USER"
 MYHOME="$HOME"
 SUDOME="$( [ "$UID" == 0 ] && echo "" || echo "sudo -u $MYUSER" )"
 
 DISTRO_LIKE=$(distro_name)
 # package management related commands and variables
-UPDATE="$(([[ $DISTRO_LIKE == "debian" ]] && echo "apt-get update -y") || ([[ $DISTRO_LIKE == "fedora" ]] && echo "dnf upgrade -y" || ""))"
-INSTALL="$(([[ $DISTRO_LIKE == "debian" ]] && echo "apt-get install -y") || ([[ $DISTRO_LIKE == "fedora" ]] && echo "dnf install -y" || ""))"
-REMOVE="$(([[ $DISTRO_LIKE == "debian" ]] && echo "apt-get remove -y") || ([[ $DISTRO_LIKE == "fedora" ]] && echo "dnf remove -y" || "" ))"
-AUTOREMOVE="$(([[ $DISTRO_LIKE == "debian" ]] && echo "apt-get autoremove -y") || ([[ $DISTRO_LIKE == "fedora" ]] && echo "dnf autoremove -y" || ""))"
-PACKAGE_EXT="$(([[ $DISTRO_LIKE == "debian" ]] && echo "deb") || ([[ $DISTRO_LIKE == "fedora" ]] && echo "rpm" || ""))"
-
-# distro specific files
-DISTRO_FOLDER="$REPO_HOME/distros/$DISTRO_LIKE"
-DEPENDENCIES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/dependencies.txt"
-PACKAGES_FILE="$REPO_HOME/distros/$DISTRO_LIKE/packages.txt"
-INSTALL_OTHER_SCRIPT="$REPO_HOME/distros/$DISTRO_LIKE/install_other.sh"
+readarray -t vars <<< $(populate_variables ${DISTRO_LIKE})
+UPDATE="${vars[0]}"
+INSTALL="${vars[1]}"
+REMOVE="${vars[2]}"
+AUTOREMOVE="${vars[3]}"
+PACKAGE_EXT="${vars[4]}"
+DISTRO_FOLDER="${vars[5]}"
+DEPENDENCIES_FILE="${vars[6]}"
+PACKAGES_FILE="${vars[7]}"
+INSTALL_OTHER_SCRIPT="${vars[8]}"
 

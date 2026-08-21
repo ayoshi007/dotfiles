@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-REPO_HOME="${SCRIPT_DIR}/../../"
 
 . "${SCRIPT_DIR}"/utils.sh
 
@@ -27,7 +26,7 @@ function install_ohmyzsh {
 	if yes_or_none "Stow adopt home config to ${MYHOME}?" ; then
 		sudo stow --adopt home -t "${MYHOME}"
 		echo "Done"
-		yes_or_none "Restore source controlled configs?" && git restore "${REPO_HOME}"/home && echo "Done"
+		yes_or_none "Restore source controlled configs?" && git restore "${SCRIPT_DIR}"/home && echo "Done"
 	fi
 }
 
